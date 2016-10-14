@@ -10,15 +10,14 @@ public class dot {
     // originally from http://marblemice.blogspot.com/2010/04/generate-and-play-tone-in-android.html
     // and modified by Steve Pomeroy <steve@staticfree.info>
     private final double freqOfTone = 1000; // hz
-    private double duration = 0.1;
+    public static double duration = 0.1;
     private final int sampleRate = 8000;
     private int numSamples;
     private double[] sample;
     private byte generatedSnd[];
+    public AudioTrack at;
 
-    public dot() {
-        this(0.1);
-    }
+    // public dot() { this(0.1); }
 
     public dot(double d) {
         duration = d;
@@ -26,7 +25,6 @@ public class dot {
         sample = new double[numSamples];
         generatedSnd =  new byte[2 * numSamples];
     }
-
 
     public void genTone(){
         // fill out the array
@@ -45,43 +43,12 @@ public class dot {
             generatedSnd[idx++] = (byte) ((val & 0xff00) >>> 8);
 
         }
+        at.write(generatedSnd, 0, generatedSnd.length);
     }
 
     public void playSound(){
-        final AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
-                sampleRate, AudioFormat.CHANNEL_OUT_MONO,
-                AudioFormat.ENCODING_PCM_16BIT, generatedSnd.length,
-                AudioTrack.MODE_STATIC);
-
-        audioTrack.write(generatedSnd, 0, generatedSnd.length);
-        audioTrack.play();
+        at.stop();
+        at.reloadStaticData();
+        at.play();
     }
 }
-
-
-// Handler handler = new Handler();
-
-/* @Override
-public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-}*/
-
-// @Override
-/* protected void onResume() {
-    // super.onResume();
-
-    // Use a new tread as this can take a while
-    final Thread thread = new Thread(new Runnable() {
-        public void run() {
-            genTone();
-            handler.post(new Runnable() {
-
-                public void run() {
-                    playSound();
-                }
-            });
-        }
-    });
-    thread.start();
-}*/
