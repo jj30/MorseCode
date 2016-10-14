@@ -13,8 +13,18 @@
     tools:context="net.buildingfive.jj.morsecode.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/text_to_encode"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:hint="@string/text_to_encode"
+        android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/encode_button"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/button_encode"
+        android:onClick="selfDestruct" />
 </RelativeLayout>

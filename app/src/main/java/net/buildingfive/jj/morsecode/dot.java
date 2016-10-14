@@ -1,21 +1,15 @@
 package net.buildingfive.jj.morsecode;
 
-import android.app.Activity;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
-import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-
-import java.io.Console;
 
 // extends Activity
 public class dot {
     // http://stackoverflow.com/questions/2413426/playing-an-arbitrary-tone-with-android
     // originally from http://marblemice.blogspot.com/2010/04/generate-and-play-tone-in-android.html
     // and modified by Steve Pomeroy <steve@staticfree.info>
-    private final double freqOfTone = 440; // hz
+    private final double freqOfTone = 1000; // hz
     private double duration = 0.1;
     private final int sampleRate = 8000;
     private int numSamples;

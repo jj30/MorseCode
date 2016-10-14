@@ -2,12 +2,10 @@ package net.buildingfive.jj.morsecode;
 
 import java.util.ArrayList;
 
-public class MorseString {
+public class MorseLetter extends ArrayList<Double> {
     private final double dotLength = 0.1;
-    private final double dashLength = 0.5;
+    private final double dashLength = 0.3;
 
-    // public final double[] a = { dotLength, dashLength };
-    // public final double[] b = { dashLength, dotLength, dotLength, dotLength };
     private final ArrayList<Double> a = new ArrayList<Double>() {{ add(dotLength); add(dashLength); }};
     private final ArrayList<Double> b = new ArrayList<Double>() {{ add(dashLength); add(dotLength); add(dotLength); add(dotLength); }};
     private final ArrayList<Double> c = new ArrayList<Double>() {{ add(dashLength); add(dotLength); add(dashLength); add(dotLength); }};
@@ -35,95 +33,89 @@ public class MorseString {
     private final ArrayList<Double> y = new ArrayList<Double>() {{ add(dashLength); add(dotLength); add(dashLength); add(dashLength); }};
     private final ArrayList<Double> z = new ArrayList<Double>() {{ add(dashLength); add(dashLength); add(dotLength); add(dotLength); }};
 
-    public ArrayList<Double> code(String incoming) {
-        ArrayList<Double> morse = new ArrayList<Double>();
-        incoming = incoming.toLowerCase();
-
-        for (Character car : incoming.toCharArray()) {
-            switch (car.toString()) {
-                case "a":
-                    morse.addAll(a);
-                    break;
-                case "b":
-                    morse.addAll(b);
-                    break;
-                case "c":
-                    morse.addAll(c);
-                    break;
-                case "d":
-                    morse.addAll(d);
-                    break;
-                case "e":
-                    morse.addAll(e);
-                    break;
-                case "f":
-                    morse.addAll(f);
-                    break;
-                case "g":
-                    morse.addAll(g);
-                    break;
-                case "h":
-                    morse.addAll(h);
-                    break;
-                case "i":
-                    morse.addAll(i);
-                    break;
-                case "j":
-                    morse.addAll(j);
-                    break;
-                case "k":
-                    morse.addAll(k);
-                    break;
-                case "l":
-                    morse.addAll(l);
-                    break;
-                case "m":
-                    morse.addAll(m);
-                    break;
-                case "n":
-                    morse.addAll(n);
-                    break;
-                case "o":
-                    morse.addAll(o);
-                    break;
-                case "p":
-                    morse.addAll(p);
-                    break;
-                case "q":
-                    morse.addAll(q);
-                    break;
-                case "r":
-                    morse.addAll(r);
-                    break;
-                case "s":
-                    morse.addAll(s);
-                    break;
-                case "t":
-                    morse.addAll(t);
-                    break;
-                case "u":
-                    morse.addAll(u);
-                    break;
-                case "v":
-                    morse.addAll(v);
-                    break;
-                case "w":
-                    morse.addAll(w);
-                    break;
-                case "x":
-                    morse.addAll(x);
-                    break;
-                case "y":
-                    morse.addAll(y);
-                    break;
-                case "z":
-                    morse.addAll(z);
-                    break;
-                default:
-                    break;
-            }
+    public MorseLetter(Character inbound) {
+        switch (inbound.toString()) {
+            case "a":
+                addAll(a);
+                break;
+            case "b":
+                addAll(b);
+                break;
+            case "c":
+                addAll(c);
+                break;
+            case "d":
+                addAll(d);
+                break;
+            case "e":
+                addAll(e);
+                break;
+            case "f":
+                addAll(f);
+                break;
+            case "g":
+                addAll(g);
+                break;
+            case "h":
+                addAll(h);
+                break;
+            case "i":
+                addAll(i);
+                break;
+            case "j":
+                addAll(j);
+                break;
+            case "k":
+                addAll(k);
+                break;
+            case "l":
+                addAll(l);
+                break;
+            case "m":
+                addAll(m);
+                break;
+            case "n":
+                addAll(n);
+                break;
+            case "o":
+                addAll(o);
+                break;
+            case "p":
+                addAll(p);
+                break;
+            case "q":
+                addAll(q);
+                break;
+            case "r":
+                addAll(r);
+                break;
+            case "s":
+                addAll(s);
+                break;
+            case "t":
+                addAll(t);
+                break;
+            case "u":
+                addAll(u);
+                break;
+            case "v":
+                addAll(v);
+                break;
+            case "w":
+                addAll(w);
+                break;
+            case "x":
+                addAll(x);
+                break;
+            case "y":
+                addAll(y);
+                break;
+            case "z":
+                addAll(z);
+                break;
+            default:
+                break;
         }
-
-        return morse;
     }
 }
+
