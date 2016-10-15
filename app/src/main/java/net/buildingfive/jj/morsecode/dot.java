@@ -10,7 +10,7 @@ public class dot {
     // originally from http://marblemice.blogspot.com/2010/04/generate-and-play-tone-in-android.html
     // and modified by Steve Pomeroy <steve@staticfree.info>
     private final double freqOfTone = 1000; // hz
-    public static double duration = 0.1;
+    private double duration = 0.1;
     private final int sampleRate = 8000;
     private int numSamples;
     private double[] sample;
@@ -52,3 +52,4 @@ public class dot {
         at.play();
     }
 }
+

@@ -13,9 +13,9 @@ public class MorseLetter extends ArrayList<Double> {
     private final ArrayList<Double> e = new ArrayList<Double>() {{ add(dotLength); }};
     private final ArrayList<Double> f = new ArrayList<Double>() {{ add(dotLength); add(dotLength); add(dashLength); add(dotLength); }};
     private final ArrayList<Double> g = new ArrayList<Double>() {{ add(dashLength); add(dashLength); add(dotLength); }};
-    private final ArrayList<Double> h = new ArrayList<Double>() {{ add(dashLength); add(dotLength); add(dotLength); add(dotLength); }};
-    private final ArrayList<Double> i = new ArrayList<Double>() {{ add(dotLength); add(dotLength); add(dotLength); add(dotLength); }};
-    private final ArrayList<Double> j = new ArrayList<Double>() {{ add(dotLength); add(dotLength); }};
+    private final ArrayList<Double> h = new ArrayList<Double>() {{ add(dotLength); add(dotLength); add(dotLength); add(dotLength); }};
+    private final ArrayList<Double> i = new ArrayList<Double>() {{ add(dotLength); add(dotLength); }};
+    private final ArrayList<Double> j = new ArrayList<Double>() {{ add(dotLength); add(dashLength); add(dashLength); add(dashLength); }};
     private final ArrayList<Double> k = new ArrayList<Double>() {{ add(dashLength); add(dotLength); add(dashLength); }};
     private final ArrayList<Double> l = new ArrayList<Double>() {{ add(dotLength); add(dashLength); add(dotLength); add(dotLength); }};;
     private final ArrayList<Double> m = new ArrayList<Double>() {{ add(dashLength); add(dashLength); }};
@@ -34,7 +34,7 @@ public class MorseLetter extends ArrayList<Double> {
     private final ArrayList<Double> z = new ArrayList<Double>() {{ add(dashLength); add(dashLength); add(dotLength); add(dotLength); }};
 
     public MorseLetter(Character inbound) {
-        switch (inbound.toString()) {
+        switch (inbound.toString().toLowerCase()) {
             case "a":
                 addAll(a);
                 break;
@@ -117,5 +117,5 @@ public class MorseLetter extends ArrayList<Double> {
                 break;
         }
     }
-}
+ }
 

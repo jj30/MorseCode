@@ -27,4 +27,12 @@
         android:layout_alignParentBottom="true"
         android:text="@string/button_encode"
         android:onClick="selfDestruct" />
+
+    <TextSwitcher
+        android:id="@+id/switcher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/encode_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="45dp" />
 </RelativeLayout>
