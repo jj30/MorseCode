@@ -1,6 +1,7 @@
 package net.buildingfive.jj.morsecode;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.media.AudioFormat;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         final TextSwitcher mSwitcher = (TextSwitcher) findViewById(R.id.switcher);
         final EditText et = (EditText) findViewById(R.id.text_to_encode);
         final Button buttonEncode = (Button) findViewById(R.id.encode_button);
+        final Button buttonDecode = (Button) findViewById(R.id.decode_button);
         final AudioTrack audioTrackDit = new AudioTrack(AudioManager.STREAM_MUSIC,
                 8000, AudioFormat.CHANNEL_OUT_MONO,
                 AudioFormat.ENCODING_PCM_16BIT, 1600,
@@ -97,6 +99,14 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+            }
+        });
+
+        buttonDecode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), UploadRecording.class);
+                startActivity(intent);
             }
         });
     }

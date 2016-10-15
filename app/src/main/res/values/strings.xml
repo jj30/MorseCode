@@ -2,4 +2,6 @@
     <string name="app_name">MorseCode</string>
     <string name="text_to_encode">Input text to encode</string>
     <string name="button_encode">Encode</string>
+    <string name="button_decode">Decode</string>
+    <string name="title_activity_upload_recording">UploadRecording</string>
 </resources>

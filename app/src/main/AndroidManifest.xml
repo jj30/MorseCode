@@ -18,7 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".dot"></activity>
+        <activity android:name=".dot" />
+        <activity
+            android:name=".UploadRecording"
+            android:label="@string/title_activity_upload_recording"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
