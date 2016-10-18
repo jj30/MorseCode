@@ -4,4 +4,10 @@
     <string name="button_encode">Encode</string>
     <string name="button_decode">Decode</string>
     <string name="title_activity_upload_recording">UploadRecording</string>
+    <string name="create_mp3">Parse MP3</string>
+    <string name="button_enc_light">Light</string>
+    <string name="title_activity_create_mp3">CreateMP3</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

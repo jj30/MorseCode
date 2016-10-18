@@ -1,8 +1,12 @@
 package net.buildingfive.jj.morsecode;
 
-import android.media.AudioFormat;
-import android.media.AudioManager;
+import android.graphics.SurfaceTexture;
+import android.hardware.Camera;
 import android.media.AudioTrack;
+import android.os.Handler;
+import android.util.Log;
+
+import java.io.IOException;
 
 // extends Activity
 public class dot {
@@ -16,6 +20,7 @@ public class dot {
     private double[] sample;
     private byte generatedSnd[];
     public AudioTrack at;
+    public Camera Cam = null;
 
     // public dot() { this(0.1); }
 
@@ -50,6 +55,40 @@ public class dot {
         at.stop();
         at.reloadStaticData();
         at.play();
+    }
+
+    public void showLight() {
+
+        if (this.Cam == null) {
+            this.Cam = Camera.open();
+        }
+
+        final Camera.Parameters p = Cam.getParameters();
+        p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        Cam.setParameters(p);
+
+        Log.v("MorseCode", "Flash started");
+        Cam.startPreview();
+
+
+        SurfaceTexture mPreviewTexture = new SurfaceTexture(0);
+        try {
+            Cam.setPreviewTexture(mPreviewTexture);
+        } catch (IOException ex) {
+            // Ignore
+        }
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                p.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                Cam.setParameters(p);
+
+                Log.v("MorseCode", "Flash stopped");
+                // handler.postDelayed(this, 100);
+            }
+        }, (long) duration * 1000);
     }
 }
 

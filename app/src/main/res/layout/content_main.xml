@@ -27,6 +27,7 @@
         android:layout_alignParentBottom="true"
         android:text="@string/button_encode" />
 
+
     <TextSwitcher
         android:id="@+id/switcher"
         android:layout_width="match_parent"
@@ -36,10 +37,19 @@
         android:layout_marginBottom="45dp" />
 
     <Button
-        android:id="@+id/decode_button"
+        android:id="@+id/enc_light_button"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/button_decode"
+        android:text="@string/button_enc_light"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/create_mp3"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/enc_light_button"
+        android:layout_toRightOf="@id/encode_button"
+        android:text="@string/create_mp3"  />
 </RelativeLayout>
