@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.util.Log;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 // extends Activity
 public class dot {
@@ -20,7 +22,7 @@ public class dot {
     private double[] sample;
     private byte generatedSnd[];
     public AudioTrack at;
-    public Camera Cam = null;
+    public static Camera Cam = null;
 
     // public dot() { this(0.1); }
 
@@ -58,37 +60,35 @@ public class dot {
     }
 
     public void showLight() {
-
         if (this.Cam == null) {
             this.Cam = Camera.open();
         }
 
-        final Camera.Parameters p = Cam.getParameters();
+        final Camera.Parameters p = this.Cam.getParameters();
         p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-        Cam.setParameters(p);
+        this.Cam.setParameters(p);
 
-        Log.v("MorseCode", "Flash started");
-        Cam.startPreview();
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
+        Log.v("MorseCode", "Flash started at " + ts);
+        this.Cam.startPreview();
+
+        long lngDuration = (long) (Math.floor(1000 * duration));
+        final String strDuration =  String.valueOf(lngDuration);
 
 
-        SurfaceTexture mPreviewTexture = new SurfaceTexture(0);
-        try {
-            Cam.setPreviewTexture(mPreviewTexture);
-        } catch (IOException ex) {
-            // Ignore
-        }
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                p.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-                Cam.setParameters(p);
+                try {
+                    Camera.Parameters p = Cam.getParameters();
+                    p.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                    Cam.setParameters(p);
+                } catch (Exception ex) {
 
-                Log.v("MorseCode", "Flash stopped");
-                // handler.postDelayed(this, 100);
+                }
             }
-        }, (long) duration * 1000);
+        }, lngDuration);
     }
 }
 

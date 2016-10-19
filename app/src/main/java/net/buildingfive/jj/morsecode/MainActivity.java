@@ -12,6 +12,7 @@ import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,6 +27,7 @@ import android.widget.ViewSwitcher;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     public static final double dotDuration = 0.1;
@@ -36,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         cam = Camera.open();
+        cam.setErrorCallback(new Camera.ErrorCallback() {
+            @Override
+            public void onError(int error, Camera camera) {
+                Log.v("MorseCode", "In the error callback");
+            }
+        });
     }
 
     @Override
@@ -43,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         if(cam != null){
-            cam.release();
+            releaseCam();
         }
     }
 
@@ -52,7 +60,16 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
 
         if(cam != null){
-            cam.release();
+            releaseCam();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(cam != null){
+            releaseCam();
         }
     }
 
@@ -61,7 +78,30 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         if(cam == null){
-            cam = Camera.open();
+            try {
+                cam = Camera.open();
+            } catch (Exception ex) {
+                Log.v("MorseCode", ex.getMessage());
+            } finally {
+                releaseCam();
+                cam = Camera.open();
+            }
+        }
+    }
+
+    private void releaseCam() {
+        try {
+            cam.stopPreview();
+            cam.setPreviewCallback(new Camera.PreviewCallback() {
+                @Override
+                public void onPreviewFrame(byte[] data, Camera camera) {
+                    Log.v("MorseCode", "In the callback");
+                }
+            });
+            cam.release();
+            cam = null;
+        } catch(Exception ex) {
+            Log.v("MorseCode", ex.getMessage());
         }
     }
 
@@ -140,11 +180,6 @@ public class MainActivity extends AppCompatActivity {
         buttonEncLight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // Intent intent = new Intent(v.getContext(), UploadRecording.class);
-                // startActivity(intent);
-
-
                 final char[] inbound = et.getText().toString().toCharArray();
                 char currentCharacter = inbound[n % inbound.length];
                 mSwitcher.setText(Character.toString(currentCharacter));
@@ -155,20 +190,15 @@ public class MainActivity extends AppCompatActivity {
                 dot dit = new dot(dotDuration);
 
                 // dash is typically three t imes longer than the dit
-                dot dah = new dot(dotDuration * 3);
+                dot dah = new dot(dotDuration * 10);
 
                 ArrayList<Double> dotsAndDashes = encoded;
 
-
-
-
                 // all the dots and dashes for the 'car' letter.
                 for (Double dotDash: dotsAndDashes) {
-
                     if (cam == null) {
                         cam = Camera.open();
                     }
-
 
                     dit.Cam = cam;
                     dah.Cam = cam;
@@ -180,15 +210,15 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     try {
+                        Thread.sleep(800);
+
                         if (cam != null) {
-                            cam.stopPreview();
-                            cam.setPreviewCallback(null);
-                            cam.release();
-                            cam = null;
+                            releaseCam();
+                            Long tsLong = System.currentTimeMillis()/1000;
+                            String ts = tsLong.toString();
+                            Log.v("MorseCode", "Flash stopped at " + ts);
                         }
 
-
-                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
